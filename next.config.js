@@ -1,6 +1,14 @@
 /** @type {import('next').NextConfig} */
-const nextConfig =  {
-  reactStrictMode: true,
-}
+const { PHASE_PRODUCTION_BUILD } = require('next/constants');
 
-module.exports = nextConfig
+const nextConfig = (phase) => {
+	return {
+		reactStrictMode: true,
+		poweredByHeader: false,
+		compiler: {
+			removeConsole: phase === PHASE_PRODUCTION_BUILD,
+		},
+	};
+};
+
+module.exports = nextConfig;

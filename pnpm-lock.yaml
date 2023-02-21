@@ -1,7 +1,6 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@next/font': 13.1.6
   '@tailwindcss/forms': ^0.5.3
   '@types/react': ^18.0.28
   autoprefixer: ^10.4.13
@@ -17,7 +16,6 @@ specifiers:
   tailwindcss: ^3.2.7
 
 dependencies:
-  '@next/font': 13.1.6
   classnames: 2.3.2
   formik: 2.2.9_react@18.2.0
   next: 13.1.6_biqbaboplfbrettd7655fr4n2y
@@ -89,10 +87,6 @@ packages:
     dependencies:
       glob: 7.1.7
     dev: true
-
-  /@next/font/13.1.6:
-    resolution: {integrity: sha512-AITjmeb1RgX1HKMCiA39ztx2mxeAyxl4ljv2UoSBUGAbFFMg8MO7YAvjHCgFhD39hL7YTbFjol04e/BPBH5RzQ==}
-    dev: false
 
   /@next/swc-android-arm-eabi/13.1.6:
     resolution: {integrity: sha512-F3/6Z8LH/pGlPzR1AcjPFxx35mPqjE5xZcf+IL+KgbW9tMkp7CYi1y7qKrEWU7W4AumxX/8OINnDQWLiwLasLQ==}
