@@ -1,10 +1,13 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext } from 'react';
 import { useFormik } from 'formik';
 import isValidEmail from '@/lib/isValidEmail';
+import useSessionStorage from '@/hooks/useSessionStorage';
 
 const ContactFormikContext = createContext(null);
 //THe display name for React Dev tools
 ContactFormikContext.displayName = 'ContactFormikProvider';
+const SaveFormToSessionContext = createContext(null);
+SaveFormToSessionContext.displayName = 'SaveFormToSessionContext';
 
 //the initial values for the form
 export const initialContactFormValues = {
@@ -49,16 +52,22 @@ function validateContactFormValues(values = initialContactFormValues) {
 }
 
 export default function ContactFormProvider({ children }) {
+	const [contactFormValues, setContactFormValues] = useSessionStorage(
+		'contactFormValues',
+		initialContactFormValues
+	);
 	//the formik object
 	const formik = useFormik({
-		initialValues: initialContactFormValues,
+		initialValues: contactFormValues,
 		validate: validateContactFormValues,
 		// validateOnMount: true
 	});
 
 	return (
 		<ContactFormikContext.Provider value={formik}>
-			{children}
+			<SaveFormToSessionContext.Provider value={setContactFormValues}>
+				{children}
+			</SaveFormToSessionContext.Provider>
 		</ContactFormikContext.Provider>
 	);
 }
@@ -71,3 +80,5 @@ export default function ContactFormProvider({ children }) {
  * the ContactFormikProvider
  */
 export const useContactFormik = () => useContext(ContactFormikContext);
+export const useSaveContactFormToSessionStorage = () =>
+	useContext(SaveFormToSessionContext);

@@ -5,11 +5,15 @@ import cn from 'classnames';
 import {
 	initialContactFormValues,
 	useContactFormik,
+	useSaveContactFormToSessionStorage,
 } from '@/context/ContactFormProvider';
 
 export default function ContactForm() {
 	//consume the formik  value for this form
 	const formik = useContactFormik();
+	//consume the function to save the contactForm values to session storage
+	const saveContactFormValuesToSessionStorage =
+		useSaveContactFormToSessionStorage();
 
 	//the ref for the first name input
 	const nameInputRef = useRef(null);
@@ -31,12 +35,16 @@ export default function ContactForm() {
 		setIsValidForm(Boolean(formik?.isValid && formik?.values?.name));
 	}, [formik]);
 
+	//save the form value to session when the formik.values changes
+	useEffect(() => {
+		saveContactFormValuesToSessionStorage({ ...formik?.values });
+	}, [formik?.values, saveContactFormValuesToSessionStorage]);
+
 	//function to handle form submission
 	function handleFormSubmit(e) {
 		e.preventDefault();
 		//validate the form again
 		formik.validateForm();
-
 		if (isValidForm) {
 			setIsSubmitting(true);
 			//mimic form submission to the server runs after 3s
@@ -52,7 +60,7 @@ export default function ContactForm() {
 					touched: {},
 					errors: {},
 				});
-			}, 3000);
+			}, 1000);
 		}
 	}
 
@@ -241,7 +249,7 @@ export default function ContactForm() {
 				</button>
 				{formik?.errors?.acceptTerms ? (
 					<small
-						aria-describedby='message input error'
+						aria-describedby='accept Terms checkbox error'
 						className='text-red-500 font-medium'
 					>
 						{formik?.errors?.acceptTerms}
