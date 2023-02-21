@@ -7,7 +7,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with
 -   ### Clone this this repository
 
     ```sh
-      git clone -b main https://github.com/ndejoma/next-js-form-validation-formik
+      git clone -b main https://github.com/ndejoma/nextjs-formvalidation-with-formik
     ```
 - Install all the dependencies and devDependencies and make sure your `NODE_ENV` is `development`, if not the devDependencies will not be installed
     ```sh
